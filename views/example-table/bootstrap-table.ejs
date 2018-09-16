@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <!-- custom -->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="layout-header">
+      <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Example table</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="/tabledit">Tabledit</a></li>
+                    <li class="active"><a href="/bootstrap-table">Bootstrap-table</a></li>
+                    <li class=""><a href="/datatables">Datatables</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+      </nav>
+    </div>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- bootstrap-table -->
+    <script src="/bootstrap-table/dist/bootstrap-table.js"></script>
+    <script src="/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
+    <script src="/javascripts/libs/tableExport.js"></script>
+    <!-- booststrap-table editable -->
+    <script src="/bootstrap-table/dist/extensions/editable/bootstrap-table-editable.js"></script>
+    <script src="/bootstrap-editable/js/index.js"></script>
+  </body>
+</html>
