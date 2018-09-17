@@ -5,7 +5,7 @@ module.exports = function(app){
   });
 
   app.use('/tabledit', require('./table/tabledit.js'));
-  app.use('/bootstrap-table', require('./table/bootstrap-table.js'));
+  app.use('/bootstrapTable', require('./table/bootstrap-table.js'));
   app.use('/datatables', require('./table/datatables.js'));
 
   app.use('/users', require('./users'));
