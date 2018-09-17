@@ -6,6 +6,7 @@
     "start": "supervisor --harmony -i views/,public/ ./bin/www"
   },
   "dependencies": {
+    "X-editable": "^1.5.1",
     "bootstrap": "^3.3.7",
     "bootstrap-table": "^1.12.1",
     "cookie-parser": "~1.4.3",
@@ -19,6 +20,7 @@
     "http-errors": "~1.6.2",
     "jquery": "^3.3.1",
     "jquery-validation": "^1.14.0",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "tableexport.jquery.plugin": "^1.10.1"
   }
 }
