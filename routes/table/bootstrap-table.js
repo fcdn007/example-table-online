@@ -7,9 +7,9 @@ router.get('/', function(req, res, next){
     title: 'example-bootstrap-table'
   });
 });
-// Get table data
-router.get('/data', function(req,res,next){
-  res.send();
+// X-editable data
+router.post('/edit', function(req,res,next){
+  res.send('success');
 });
 
 module.exports = router;

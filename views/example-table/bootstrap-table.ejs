@@ -88,7 +88,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title text-danger">添加项目 <small> 测试测试</small></h4>
           </div>  
-          <form class="form-horizontal" method="POST" action="/#">
+          <form class="form-horizontal" method="POST" action="#">
             <div class="modal-body">
               <div class="form-group">
                 <label for="name" class="control-label col-lg-2">名称</label>
@@ -134,7 +134,7 @@
           </form>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
-    </div>
+    </div><!-- /.modal -->
 
     <!-- jQuery 3 -->
     <script src="/jquery/dist/jquery.min.js"></script>
@@ -169,7 +169,7 @@
             pagination: true,
             paginationLoopz: true,
             search: true,
-            // idField: 'id',
+            idField: 'name',
             showColumns: true,
             showExport: true,
             showRefresh: true,
@@ -188,11 +188,23 @@
             },{
                 field: 'column1',
                 title: '列1',
-                editable: true,
+                editable: {
+                  url: '/bootstrapTable/edit',
+                  type: 'select',
+                  // value: 1,
+                  source: [
+                    {value: 1, text: 'C 10'},
+                    {value: 2, text: 'Active'},
+                    {value: 3, text: 'Blocked'},
+                    {value: 4, text: 'Deleted'}
+                  ]
+                },
             },{
                 field: 'column2',
                 title: '列2',
-                editable: true,
+                editable: {
+                  url: '/bootstrapTable/edit',
+                },
             },{
                 field: 'column3',
                 title: '列3',
@@ -201,7 +213,36 @@
                 field: 'column4',
                 title: '列4',
                 editable: true,
-            } ]
+            },{
+                field: 'operator',
+                title: '操作',
+                align: 'center',
+                valign: 'middle',
+                width: '10%',
+                // visible: false,
+                formatter: function (value, row, index) {
+                    return '<a href="#">' + 
+                        '<i class="glyphicon glyphicon-eye-open" title="显示"></i> ' + 
+                        '</a>'+ 
+                        '<a href="#editProject" data-toggle="modal" title="修改">' + 
+                        '<i class="glyphicon glyphicon-pencil"></i> ' + 
+                        '</a>'+
+                        '<a href="javascript:void(0)" title="删除">' +
+                        '<i class="glyphicon glyphicon-trash text-danger"></i> ' + 
+                        '</a>';
+                },
+                events: {
+                  'click a[title=删除]': function (e, value, row, index) {
+                      if(confirm('此操作不可逆，请确认是否删除？')){
+                          $.ajax();
+                      }
+                  },
+                  'click a[title=修改]': function (e, value, row, index) {
+                      // e.preventDefault();
+                      alert('click change button');
+                  },
+                }
+            }]
         });
         // 本地筛选
         $('#localFilter li a').click(function(e){
