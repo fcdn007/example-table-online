@@ -11,7 +11,8 @@ var data = [
       "bz": "yyyyyyyyyyyyyyyyyyyy",
       "createdAt": "2018-03-09T01:11:00.000Z",
       "updatedAt": "2018-03-09T01:11:00.000Z",
-      "deletedAt": null},{
+      "deletedAt": null
+   },{
       "id": 2,
       "plant": "公司B",
       "place": "武汉",

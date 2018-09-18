@@ -107,8 +107,11 @@
     <!-- DataTable buttons -->
     <script src="/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
     <script src="/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="/datatables.net-buttons/js/buttons.html5.min.js"></script>
     <script src="/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/jszip/dist/jszip.min.js"></script>
+    <script src="/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- datatables select  -->
     <script src="/datatables.net-select/js/dataTables.select.min.js"></script>
@@ -123,24 +126,25 @@
       $(function(){
         // datatables
         $.fn.dataTable.ext.buttons.reload = {
-            text: '<i class="fa fa-refresh"></i>',
+            text: '<i class="glyphicon glyphicon-refresh"></i>',
             action: function ( e, dt, node, config ) {
                 dt.ajax.reload();
             }
         };
         var table = $('#table').DataTable({
-            // dom: '<"pull-right"i>t<"pull-left"B><"pull-right"p><"clear">',
+            dom: '<"pull-left"B>frt<"pull-left"i>p',
             // pagingType: "numbers",
             // lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
             buttons: [
-                'reload', 
-                {
-                    text: '<i class="fa fa-file-excel-o"></i>',
-                    extend: 'excel'
-                }
+                // 'reload',
+                'copy',
+                'print',
+                'excel',
+                'csv',
+                'pdf'
             ],
             ajax: {
-                url: '/json/data.json',
+                url: '/data/test.data',
                 dataSrc: ''
             },
             columns: [

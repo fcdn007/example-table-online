@@ -20,7 +20,9 @@
     "http-errors": "~1.6.2",
     "jquery": "^3.3.1",
     "jquery-validation": "^1.14.0",
+    "jszip": "^3.1.5",
     "morgan": "~1.9.0",
+    "pdfmake": "^0.1.38",
     "tableexport.jquery.plugin": "^1.10.1"
   }
 }
