@@ -95,7 +95,62 @@
         </div>
       </div>
     </div>
-
+    <!-- modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-danger">编辑项目 <small> 测试测试</small></h4>
+          </div>  
+          <form class="form-horizontal" method="POST" action="#">
+            <input type="hidden" name="id">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="name" class="control-label col-lg-2">名称</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="name" placeholder="" required="true" maxlength="50">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="price" class="control-label col-lg-2">价格</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="price" placeholder="" required maxlength="20">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="column1" class="control-label col-lg-2">列1</label>
+                <div class="col-lg-10">
+                  <input type="text" name="column1" placeholder="" class="form-control" required maxlength="10">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="column2" class="control-label col-lg-2">列2</label>
+                <div class="col-lg-10">
+                  <input type="text" name="column2" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="column3" class="control-label col-lg-2">列3</label>
+                <div class="col-lg-10">
+                  <input type="text" name="column3" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="column4" class="control-label col-lg-2">列4</label>
+                <div class="col-lg-10">
+                  <textarea name="column4" rows="2" placeholder="" class="form-control" maxlength="200"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary">确定</button>
+            </div>
+          </form>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <!-- jQuery 3 -->
     <script src="/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
@@ -107,9 +162,12 @@
     <!-- DataTable buttons -->
     <script src="/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
     <script src="/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <!-- buttons 打印功能 -->
     <script src="/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <!-- buttons 导出功能 -->
     <script src="/datatables.net-buttons/js/buttons.html5.min.js"></script>
     <script src="/jszip/dist/jszip.min.js"></script>
+    <!-- buttons 生成PDF功能 -->
     <script src="/pdfmake/build/pdfmake.min.js"></script>
     <script src="/pdfmake/build/vfs_fonts.js"></script>
 
@@ -131,17 +189,49 @@
                 dt.ajax.reload();
             }
         };
+        $.fn.dataTable.ext.buttons.edit = {
+            text: '<i class="glyphicon glyphicon-pencil"></i>',
+            action: function ( e, dt, node, config ) {
+                var rows = dt.rows({ selected: true }); // 获取选中的行
+                var selectedCount = rows.count();       // 选中的行数量
+                var data = rows.data()[0];              // 得到行数据
+                if(selectedCount){
+                    var selectedId = data.id;
+                    $('#edit').modal('show');
+                    $('#edit small').html('编辑项目ID：' + selectedId);
+                    $('#edit form input[name=name]').val(data.name);
+                    $('#edit form input[name=price]').val(data.price);
+                    $('#edit form input[name=column1]').val(data.column1);
+                    $('#edit form input[name=column2]').val(data.column2);
+                    $('#edit form input[name=column3]').val(data.column3);
+                    $('#edit form textarea[name=column4]').val(data.column4);
+                }else{
+                    alert('请选择行再操作');
+                }
+            }
+        };
         var table = $('#table').DataTable({
-            dom: '<"pull-left"B>frt<"pull-left"i>p',
+            dom: '<"pull-left"B>ft<"pull-left"i>p',
             // pagingType: "numbers",
             // lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
             buttons: [
-                // 'reload',
-                'copy',
-                'print',
-                'excel',
-                'csv',
-                'pdf'
+                {
+                    text: '<i class="glyphicon glyphicon-copy" title="复制"></i>',
+                    extend: 'copy'
+                }, {
+                    text: '<i class="glyphicon glyphicon-print" title="打印"></i>',
+                    extend: 'print'
+                }, 
+                {
+                    text: '<i class="glyphicon glyphicon-save-file" title="导出excel"></i>',
+                    extend: 'excel'
+                }, {
+                    text: '<i class="glyphicon glyphicon-list-alt" title="导出csv"></i>',
+                    extend: 'csv'
+                }, {
+                    text: '<i class="glyphicon glyphicon-file" title="生成pdf"></i>',
+                    extend: 'pdf'
+                }, 'reload','edit'
             ],
             ajax: {
                 url: '/data/test.data',
@@ -177,36 +267,30 @@
                 }
             ],
             order: [[ 2, "asc" ]],
+            select: 'single',
             language: {
                 url: '/json/Chinese.json'
             }
         });
-        // 编辑modal
+
+        // 操作区使用：编辑modal
         $('#editProject').on('show.bs.modal', function(e){
             var button = $(e.relatedTarget); 
             var id = button.data('id');
             $.ajax();   // 编辑操作
         });
+        // 操作区使用：删除modal
         $('#delProject').on('show.bs.modal', function(e){
             var button = $(e.relatedTarget); 
             var id = button.data('id');
             $.ajax();   // 删除操作
         });
-        // data 日期后台筛选
-        var $projectListFilter = $('#projectListFilter');
-        $projectListFilter.submit(function(e){
+
+        // data 前台筛选
+        $('#localFilter li a').click(function(e){
             e.preventDefault();
-            var dateRange = $('#dateRange').val();
-            var startDate = dateRange.split('-')[0].trim();
-            var endDate = dateRange.split('-')[1].trim();
-            console.log('开始日期：%s, 结束日期：%s',startDate,endDate);
-            table.ajax.url('/d/project/list?startDate='+ startDate + '&endDate='+ endDate).load();
-        });
-        // data 学院筛选
-        $('#academyFilter li a').click(function(e){
-            e.preventDefault();
-            var academy = $(this).data('academy');
-            table.search(academy).draw();
+            var filter = $(this).data('filter');
+            table.search(filter).draw();
         });
       });
     </script>
