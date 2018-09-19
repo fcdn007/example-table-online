@@ -43,40 +43,6 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <!-- <div id="toolbar">
-            <form method="POST" action="javasctip:void(0)" id="Filter" class="form-inline">
-              <div class="form-group">
-                <a class="btn btn-sm btn-default" href="#add" data-toggle="modal">
-                    <i class="glyphicon glyphicon-plus"></i> 
-                </a>
-              </div>
-              <div class="form-group">
-                <label class="sr-only" for="filter">Filter</label>
-                <div class="input-group">
-                  <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-                  <input type="text" class="form-control input-sm" name="filter" placeholder="筛选条件">
-                </div>
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-sm">提交</button>
-              </div>
-              <div class="form-group">
-                <div class="btn-group" id="localFilter">
-                  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    本地筛选 <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                      <li><a href="javascript:void(0)" data-filter="">全部</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="javascript:void(0)" data-filter="$1">$1</a></li>
-                      <li><a href="javascript:void(0)" data-filter="$2">$2</a></li>
-                      <li><a href="javascript:void(0)" data-filter="$10">$10</a></li>
-                      <li><a href="javascript:void(0)" data-filter="$20">$20</a></li>
-                  </ul>
-                </div>
-              </div>
-            </form>
-          </div> -->
           <table id="table" class="table table-bordered table-striped responsive nowrap display" style="width: 100%">
             <thead>
               <tr>
@@ -267,7 +233,10 @@
                 }
             ],
             order: [[ 2, "asc" ]],
-            select: 'single',
+            select: {
+                selector:'td:not(:first-child):not(:last-child) ',
+                style:    'single'
+            },
             language: {
                 url: '/json/Chinese.json'
             }
