@@ -11,16 +11,16 @@
 
 ## 页面展示
 
-![](/img/readme/0.png)
+![](/public/img/readme/0.png)
 
 ### tabledit
 
-![](/img/readme/1.png)
+![](/public/img/readme/1.png)
 
 ### Bootstrap-Table
 
-![](/img/readme/2.png)
+![](/public/img/readme/2.png)
 
 ### Datatables
 
-![](/img/readme/3.png)
+![](/public/img/readme/3.png)
